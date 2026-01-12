@@ -192,6 +192,24 @@
             event.stopPropagation();
             moveButton();
         });
+
+        // Eventos para mobile - foge ao tentar tocar
+        btnNao.addEventListener('touchstart', function(event) {
+            event.preventDefault();
+            moveButton();
+        });
+
+        btnNao.addEventListener('touchmove', function(event) {
+            event.preventDefault();
+            moveButton();
+        });
+
+        // Evento mousemove para detecção mais sensível no desktop
+        btnNao.addEventListener('mousemove', function(event) {
+            if (event.movementX !== 0 || event.movementY !== 0) {
+                moveButton();
+            }
+        });
     </script>
 </body>
 </html>
