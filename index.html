@@ -174,17 +174,24 @@
             document.querySelector('.buttons').style.display = 'none';
         });
 
-        // Botão Não - foge quando tenta clicar (desabilitado em mobile)
-        if (!isMobile) {
-            btnNao.addEventListener('mouseenter', function() {
-                const randomX = Math.random() * (window.innerWidth - 150);
-                const randomY = Math.random() * (window.innerHeight - 100);
-                
-                btnNao.style.position = 'fixed';
-                btnNao.style.left = randomX + 'px';
-                btnNao.style.top = randomY + 'px';
-            });
+        // Função para mover o botão para uma posição aleatória
+        function moveButton() {
+            const randomX = Math.random() * (window.innerWidth - 150);
+            const randomY = Math.random() * (window.innerHeight - 100);
+            
+            btnNao.style.position = 'fixed';
+            btnNao.style.left = randomX + 'px';
+            btnNao.style.top = randomY + 'px';
         }
+
+        // Botão Não - foge quando tenta clicar ou no mouseenter (desktop)
+        btnNao.addEventListener('mouseenter', moveButton);
+        
+        btnNao.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            moveButton();
+        });
     </script>
 </body>
 </html>
