@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pergunta</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .pergunta {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            min-width: 120px;
+        }
+
+        #btnSim {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #btnSim:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        #btnNao {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+        }
+
+        #btnNao:hover {
+            background-color: #da190b;
+        }
+
+        .mensagem {
+            margin-top: 40px;
+            font-size: 28px;
+            color: #4CAF50;
+            font-weight: bold;
+            display: none;
+        }
+
+        .mensagem.show {
+            display: block;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .pergunta {
+                font-size: 24px;
+                margin-bottom: 30px;
+            }
+
+            button {
+                padding: 12px 30px;
+                font-size: 16px;
+                min-width: 100px;
+            }
+
+            .buttons {
+                gap: 15px;
+            }
+
+            .mensagem {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .pergunta {
+                font-size: 20px;
+                margin-bottom: 25px;
+            }
+
+            button {
+                padding: 10px 25px;
+                font-size: 14px;
+                min-width: 90px;
+            }
+
+            .buttons {
+                gap: 10px;
+            }
+
+            .mensagem {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pergunta">Cuzinho hoje?</div>
+        <div class="buttons">
+            <button id="btnSim">Sim</button>
+            <button id="btnNao">Não</button>
+        </div>
+        <div class="mensagem" id="mensagem">Ótima escolha! Nós vemos mais tarde ( ͡° ͜ʖ ͡°)</div>
+    </div>
+
+    <script>
+        const btnSim = document.getElementById('btnSim');
+        const btnNao = document.getElementById('btnNao');
+        const mensagem = document.getElementById('mensagem');
+        const isMobile = window.innerWidth < 768;
+
+        // Botão Sim - funciona normalmente
+        btnSim.addEventListener('click', function() {
+            mensagem.classList.add('show');
+            document.querySelector('.buttons').style.display = 'none';
+        });
+
+        // Botão Não - foge quando tenta clicar (desabilitado em mobile)
+        if (!isMobile) {
+            btnNao.addEventListener('mouseenter', function() {
+                const randomX = Math.random() * (window.innerWidth - 150);
+                const randomY = Math.random() * (window.innerHeight - 100);
+                
+                btnNao.style.position = 'fixed';
+                btnNao.style.left = randomX + 'px';
+                btnNao.style.top = randomY + 'px';
+            });
+        }
+    </script>
+</body>
+</html>
